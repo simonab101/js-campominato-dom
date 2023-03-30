@@ -1,16 +1,68 @@
 /* Stile della griglia di gioco */
+
+body {
+  background-color: #0099cc;
+  background-image: linear-gradient(to bottom, #0099cc 0%, #99ccff 100%);
+  background-repeat: repeat-y;
+  animation: waves 7s linear infinite;
+  background-size: 100% 100%;
+  background-position: center bottom;
+  position: relative;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background: url("https://www.pngkit.com/png/full/5-54099_transparent-ocean-wave-png-ocean-wave-transparent.png") repeat-x;
+  animation: wave 7s linear infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.wave:nth-child(2) {
+  animation-duration: 9s;
+  opacity: 0.5;
+}
+
+@keyframes wave {
+  0% {
+    transform: translate3d(-90%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes waves {
+  0% {
+    background-position: center bottom;
+  }
+
+  100% {
+    background-position: center top;
+  }
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
   width: 500px;
   height: 500px;
   margin: 0 auto;
-  border: 2px solid black;
+  border: 2px solid #4a4a4a;
+  background-color: #ddd;
 }
+
 .cell {
   flex: 1 0 10%;
   box-sizing: border-box;
-  border: 1px solid black;
+  border: 1px solid #4a4a4a;
   cursor: pointer;
   text-align: center;
   font-size: 24px;
@@ -18,13 +70,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #aaa;
+  background-color: #bbb;
+  transition: background-color 0.2s ease-in-out;
 }
+
 .cell.clicked {
   background-color: #fff;
-  color: black;
+  color: #4a4a4a;
 }
+
 .cell.mine {
-  background-color: red;
-  color: white;
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+#generate {
+  margin: 10px;
+  padding: 10px;
+  background-color: #4a4a4a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#generate:hover {
+  background-color: #333;
+}
+
+#difficulty {
+  margin: 10px;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

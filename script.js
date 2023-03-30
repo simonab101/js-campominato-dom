@@ -1,45 +1,102 @@
+const container = document.querySelector(".container");
+const generateButton = document.querySelector("#generate");
+const difficultySelect = document.querySelector("#difficulty");
 
-// Catturo i riferimenti agli elementi HTML che verranno utilizzati
-const container = document.querySelector('.container');
-const generateBtn = document.getElementById('generate');
-const difficultySelect = document.getElementById('difficulty');
+let rows;
+let cols;
+let totalCells;
+let bombArray;
 
-// Aggiungo un gestore di eventi al bottone di generazione della griglia
-generateBtn.addEventListener('click', () => {
-// Ottieni il valore della difficoltà selezionata dall'utente
-	const difficulty = difficultySelect.value;
+function generateGrid() {
+  //Determina righe e colonne in base alla difficoltà
+  switch (difficultySelect.value) {
+    case "1":
+      rows = 10;
+      cols = 10;
+      break;
+    case "2":
+      rows = 9;
+      cols = 9;
+      break;
+    case "3":
+      rows = 7;
+      cols = 7;
+      break;
+    default:
+      rows = 10;
+      cols = 10;
+  }
+  
+  // Calcola il numero totale di celle
+  totalCells = rows * cols;
 
-// Calcolo il numero di righe e colonne della griglia in base alla difficoltà
-	let rows, cols, maxNum;
-	if (difficulty === '1') {
-		rows = cols = 10;
-		maxNum = 100;
-	} else if (difficulty === '2') {
-		rows = cols = 9;
-		maxNum = 81;
-	} else if (difficulty === '3') {
-		rows = cols = 7;
-		maxNum = 49;
-	}
+  // Genera schiera di bombe
+  bombArray = [];
+  while (bombArray.length < 16) {
+    const randomNumber = Math.floor(Math.random() * totalCells) + 1;
+    if (!bombArray.includes(randomNumber)) {
+      bombArray.push(randomNumber);
+    }
+  }
+  
+  // Genera codice HTML per la griglia
+  let gridHtml = "";
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      gridHtml += `<div class="cell" data-row="${i}" data-col="${j}"></div>`;
+    }
+  }
+  container.innerHTML = gridHtml;
 
-	// Creo la griglia di gioco
-	let cellNum = 1; // Numero di cella iniziale
-	container.innerHTML = ''; // Pulisci la griglia precedente (se presente)
-	for (let i = 0; i < rows; i++) {
-		for (let j = 0; j < cols; j++) {
-		// Crea una nuova cella e aggiungi un gestore di eventi per il clic
-		const cell = document.createElement('div');
-		cell.classList.add('cell');
-		cell.innerText = cellNum;
-		container.appendChild(cell);
-		cellNum++;
-		cell.addEventListener('click', () => {
-			// Colora la cella di azzurro e stampa il numero della cella nella console
-			cell.classList.add('clicked');
-			console.log(cellNum);
-		});
-	}
+  // Aggiungi il listener di eventi clic a ogni cella
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach(cell => {
+    cell.addEventListener("click", handleCellClick);
+  });
 }
-});
 
+function handleCellClick(event) {
+  const clickedCell = event.target;
+  const row = Number(clickedCell.getAttribute("data-row"));
+  const col = Number(clickedCell.getAttribute("data-col"));
+  const cellIndex = row * cols + col + 1;
+  
+  // Controlla se la cella contiene una bomba
+  if (bombArray.includes(cellIndex)) {
+    clickedCell.classList.add("mine");
+    endGame(false);
+  } else {
+    clickedCell.classList.add("clicked");
+    checkWin();
+  }
+}
 
+function checkWin() {
+  const clickedCells = document.querySelectorAll(".clicked");
+  const clickedCount = clickedCells.length;
+  const safeCount = totalCells - clickedCount - bombArray.length;
+  if (safeCount === 0) {
+    endGame(true);
+  }
+}
+
+function endGame(isWin) {
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach(cell => {
+    const row = Number(cell.getAttribute("data-row"));
+    const col = Number(cell.getAttribute("data-col"));
+    const cellIndex = row * cols + col + 1;
+    if (bombArray.includes(cellIndex)) {
+      cell.classList.add("mine");
+    }
+    cell.classList.remove("clicked");
+    cell.removeEventListener("click", handleCellClick);
+  });
+  if (isWin) {
+    alert("Hai vinto!");
+  } else {
+    alert("Hai perso!");
+  }
+}
+
+generateButton.addEventListener("click", generateGrid);
