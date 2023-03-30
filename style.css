@@ -1,0 +1,30 @@
+/* Stile della griglia di gioco */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  border: 2px solid black;
+}
+.cell {
+  flex: 1 0 10%;
+  box-sizing: border-box;
+  border: 1px solid black;
+  cursor: pointer;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #aaa;
+}
+.cell.clicked {
+  background-color: #fff;
+  color: black;
+}
+.cell.mine {
+  background-color: red;
+  color: white;
+}
