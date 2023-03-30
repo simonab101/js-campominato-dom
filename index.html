@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-	<meta charset="UTF-8">
-	<title>Griglia di gioco</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campo Minato</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<!-- Bottone per generare la griglia di gioco e select per selezionare la difficoltà -->
-	<div class="container">
-		<button id="generate">Griglia campo minato</button>
-			<select id="difficulty">
-				<option value="1">Difficoltà 1</option>
-				<option value="2">Difficoltà 2</option>
-				<option value="3">Difficoltà 3</option>
-			</select>
-		<button id="generate">new game</button>
-		</div>
-		<div class="grid"></div>
-		<div class="result"></div>
-	</div>
-	<script src="script.js"></script>
+  <h1>Campo Minato</h1>
+  <div class="difficulty">
+    <label for="difficulty-select">Seleziona difficoltà:</label>
+    <select id="difficulty-select">
+      <option value="1">Facile</option>
+      <option value="2" selected>Medio</option>
+      <option value="3">Difficile</option>
+    </select>
+    <button id="start-btn">Nuova Partita</button>
+  </div>
+  <div class="game-container">
+    <div class="game-grid"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
+

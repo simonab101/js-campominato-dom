@@ -1,36 +1,30 @@
+/* Stile della griglia di gioco */
 .container {
-	margin: 0 auto;
-	max-width: 600px;
-	text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  border: 2px solid black;
 }
-
-.grid {
-	display: grid;
-	grid-template-columns: repeat(9, 1fr);
-	grid-gap: 5px;
-	margin: 20px 0;
-}
-
 .cell {
-	background-color: #ccc;
-	height: 40px;
-	line-height: 40px;
-	text-align: center;
-	font-size: 24px;
+  flex: 1 0 10%;
+  box-sizing: border-box;
+  border: 1px solid black;
+  cursor: pointer;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #aaa;
 }
-
 .cell.clicked {
-	background-color: #99f;
-	cursor: default;
+  background-color: #fff;
+  color: black;
 }
-
-.cell.bomb {
-	background-color: #f00;
-	cursor: default;
+.cell.mine {
+  background-color: red;
+  color: white;
 }
-
-.result {
-	font-size: 24px;
-	margin-bottom: 20px;
-}
-
