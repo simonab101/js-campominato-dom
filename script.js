@@ -100,3 +100,47 @@ function endGame(isWin) {
 }
 
 generateButton.addEventListener("click", generateGrid);
+
+
+/*
+
+1. Definizione delle variabili e selezione degli elementi del DOM:
+
+-container è una variabile che fa riferimento all'elemento del DOM che ha una classe "container".
+-generateButton è una variabile che fa riferimento all'elemento del DOM che ha l'ID "generate".
+-difficultySelect è una variabile che fa riferimento all'elemento del DOM che ha l'ID "difficulty".
+
+
+2. Definizione di alcune variabili importanti:
+
+-rows e cols rappresentano il numero di righe e colonne della griglia.
+-totalCells rappresenta il numero totale di celle nella griglia.
+-bombArray è un array che conterrà gli indici delle celle che contengono le bombe.
+
+
+3. La funzione generateGrid() viene eseguita quando l'utente clicca sul pulsante "Genera" (generateButton.addEventListener("click", generateGrid);). Questa funzione esegue i seguenti passaggi:
+
+-Determina il numero di righe e colonne in base alla difficoltà selezionata dall'utente.
+-Calcola il numero totale di celle nella griglia.
+-Genera un array di 16 numeri casuali (da 1 a totalCells) che rappresentano gli indici delle celle che conterranno le bombe.
+-Genera il codice HTML per la griglia (un insieme di elementi <div> con una classe "cell" e gli attributi data-row e data-col che indicano la riga e la colonna di ciascuna cella).
+-Aggiunge un listener di eventi "click" a ciascuna cella.
+
+
+4. La funzione handleCellClick(event) viene eseguita quando l'utente clicca su una cella della griglia. Questa funzione esegue i seguenti passaggi:
+
+-Ottiene l'elemento cliccato (clickedCell).
+-Ottiene la riga e la colonna della cella cliccata (attraverso gli attributi data-row e data-col).
+-Calcola l'indice della cella (cellIndex) a partire dalla riga e dalla colonna.
+-Controlla se la cella contiene una bomba (controllando se l'indice della cella è presente nell'array bombArray).
+-Se la cella contiene una bomba, la classe "mine" viene aggiunta all'elemento cliccato e viene chiamata la funzione endGame(false) per terminare il gioco con una sconfitta.
+-Se la cella non contiene una bomba, la classe "clicked" viene aggiunta all'elemento cliccato e viene chiamata la funzione checkWin() per controllare se l'utente ha vinto il gioco.
+
+
+5. La funzione checkWin() viene eseguita dopo che l'utente ha cliccato su una cella e la cella non conteneva una bomba. Questa funzione esegue i seguenti passaggi:
+
+-Ottiene tutti gli elementi della griglia che hanno la classe "clicked".
+-Calcola il numero di celle cliccate (clickedCount).
+-Calcola il numero di celle sicure (
+
+*/
